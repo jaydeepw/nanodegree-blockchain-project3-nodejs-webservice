@@ -19,7 +19,9 @@ Project Rubric: https://review.udacity.com/#!/rubrics/1707/view
 This API end point will return the block where height = index.
 
 Sample
+
 **Request** `GET /api/block/1`
+
 **Response**
 ```
 {
@@ -37,7 +39,9 @@ Sample
 Creates a block on the blockchain using this API. 
 
 Sample
+
 **Request** `POST /api/block`
+
 **Body**
 ```
 {
