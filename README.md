@@ -1,17 +1,25 @@
-# nanodegree-blockchain-project3-nodejs-webservice
+My 3rd project when pursuing [Blockchain Developer Nanodegree](https://in.udacity.com/course/blockchain-developer-nanodegree--nd1309) from Udacity.
+This project is a webservice that creates an in-memory blockchain. It lets
+you interact with the blockchain using a REST API.
+The API has been written using [ExpressJS](https://expressjs.com/) Node framework.
 
 Project Rubric: https://review.udacity.com/#!/rubrics/1707/view
 
+### Getting started
+- Clone this repository and `cd` into it from your terminal
+- Type `npm install`
+- Type `node app.js`
+- Your server will start locally on port `8000`
 
+## Endpoint documentation
 ### Get block by `height`
 
 `GET /api/block/:index`
 
 This API end point will return the block where height = index.
 
-Sample response
+Sample
 **Request** `GET /api/block/1`
-
 **Response**
 ```
 {
@@ -26,11 +34,10 @@ Sample response
 
 `POST /api/block`
 
-Create a block on the chain using this API. 
+Creates a block on the blockchain using this API. 
 
-Sample response
+Sample
 **Request** `POST /api/block`
-
 **Body**
 ```
 {
