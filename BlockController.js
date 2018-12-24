@@ -25,7 +25,7 @@ class BlockController {
         this.app.get("/api/block/:index", (req, res) => {
             let index = req.params.index
             console.log("Getting block for index: " + index)
-            if(index >= this.blocks.length) {
+            if(index < 0 || index >= this.blocks.length) {
                 res.send("Invalid block height")
             } else {
                 let block = JSON.stringify(this.blocks[index])
@@ -40,13 +40,23 @@ class BlockController {
      * Implement a POST Endpoint to add a new Block, url: "/api/block"
      */
     postNewBlock() {
-        let self = this;
+        let self = this
         self.app.post("/api/block", (req, res) => {
-            let block = JSON.stringify(req.body);
-            console.log("req.body: " + block)
-            self.blocks.push(block);
-            console.log("blocks.length: " + self.blocks.length)
-            res.sendStatus(201);
+            let block = req.body
+            console.log("req.body: " + JSON.stringify(block))
+
+            // if(block.body == "") {
+            if (typeof block.body === 'undefined'
+                || !block.body) {
+                res.send("No data for block. block.body: " + block.body)
+            } else {
+                block.height = self.blocks.length
+                block.time = new Date().getTime()
+                block.hash = SHA256(JSON.stringify(block)).toString()
+                console.log("Block before adding to chain: block " + JSON.stringify(block))
+                self.blocks.push(block)
+                res.sendStatus(201)
+            }
         });
     }
 
