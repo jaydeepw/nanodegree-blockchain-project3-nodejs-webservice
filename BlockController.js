@@ -2,8 +2,6 @@ const SHA256 = require('crypto-js/sha256');
 const BlockChain = require('./BlockChain.js');
 const Block = require('./Block.js');
 
-
-
 /**
  * Controller Definition to encapsulate routes to work with blocks
  */
@@ -51,13 +49,18 @@ class BlockController {
                     } else {
                         self.myBlockChain.getBlock(index).then((block) => {
                             let blockJson = JSON.parse(block);
-                            res.send(200, blockJson)
+                            res.status(200).send(blockJson)
                         }).catch((err) => {
                             console.log(err);
                         });
                     }
                 }).catch((err) => {
                     console.log(err);
+                    if (err.notFound) {
+                        res.status(404).send(err)
+                    } else {
+                        res.status(400).send(err)
+                    }
                 });
             }
         });
