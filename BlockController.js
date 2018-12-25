@@ -13,8 +13,6 @@ class BlockController {
      */
     constructor(app) {
         this.app = app;
-        // this.blocks = [];
-        // this.initializeMockData();
         this.myBlockChain = new BlockChain.Blockchain();
         this.getBlockByIndex();
         this.postNewBlock();
@@ -84,27 +82,6 @@ class BlockController {
                 });
             }
         });
-    }
-
-    /**
-     * Help method to inizialized Mock dataset, adds 10 test blocks to the blocks array
-     */
-    initializeMockData() {
-        if(this.blocks.length === 0) {
-            for (let index = 0; index < 10; index++) {
-                let blockAux = ""
-
-                if(index == 0) {
-                    blockAux = new BlockClass.Block(`First block in the chain - Genesis block`)
-                } else {
-                    blockAux = new BlockClass.Block(`Test Data #${index}`)
-                }
-
-                blockAux.height = index;
-                blockAux.hash = SHA256(JSON.stringify(blockAux)).toString();
-                this.blocks.push(blockAux);
-            }
-        }
     }
 
 }
