@@ -22,17 +22,17 @@ class BlockController {
      * Implement a GET Endpoint to retrieve a block by index, url: "/api/block/:index"
      */
     getBlockByIndex() {
-        this.app.get("/api/block/:index", (req, res) => {
+        this.app.get("/block/:index", (req, res) => {
             let index = req.params.index
             console.log("Getting block for index: " + index)
             if(index < 0 || index >= this.blocks.length) {
                 res.send("Invalid block height")
             } else {
-                let block = JSON.stringify(this.blocks[index])
+                // let block = JSON.stringify(this.blocks[index])
+                let block = this.blocks[index]
                 console.log("Block block: " + block)
                 res.send(block)
             }
-            
         });
     }
 
