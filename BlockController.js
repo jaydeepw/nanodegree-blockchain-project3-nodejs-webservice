@@ -75,13 +75,12 @@ class BlockController {
             let block = req.body
             console.log("req.body: " + JSON.stringify(block))
 
-            // if(block.body == "") {
             if (typeof block.body === 'undefined'
                 || !block.body || block.body === "") {
                 res.send("No data for block. block.body: " + block.body)
             } else {
                 self.myBlockChain.addBlock(block).then((result) => {
-                    res.status(201).send(block);
+                    res.status(201).send(result);
                 });
             }
         });
