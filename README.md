@@ -5,9 +5,6 @@ The API has been written using [ExpressJS](https://expressjs.com/) Node framewor
 
 Project Rubric: https://review.udacity.com/#!/rubrics/1707/view
 
-<<<<<<< HEAD
-
-=======
 ### Getting started
 - Clone this repository and `cd` into it from your terminal
 - Type `npm install`
@@ -15,20 +12,15 @@ Project Rubric: https://review.udacity.com/#!/rubrics/1707/view
 - Your server will start locally on port `8000`
 
 ## Endpoint documentation
->>>>>>> a3302821cd668a16333d0fb45b159fb3414e8eac
 ### Get block by `height`
 
-`GET /api/block/:index`
+`GET /block/:index`
 
 This API end point will return the block where height = index.
 
-<<<<<<< HEAD
-Sample response
-=======
 Sample
 
->>>>>>> a3302821cd668a16333d0fb45b159fb3414e8eac
-**Request** `GET /api/block/1`
+**Request** `GET /block/1`
 
 **Response**
 ```
@@ -38,20 +30,17 @@ Sample
   "body": "Test Data #1",
   "time": "1545641747"
 }
-<<<<<<< HEAD
-```
-=======
 ```
 
 ### Create a block
 
-`POST /api/block`
+`POST /block`
 
 Creates a block on the blockchain using this API. 
 
 Sample
 
-**Request** `POST /api/block`
+**Request** `POST /block`
 
 **Body**
 ```
@@ -61,4 +50,3 @@ Sample
 ```
 
 `Note: 'body' is a required property when sending data to the API`
->>>>>>> a3302821cd668a16333d0fb45b159fb3414e8eac
