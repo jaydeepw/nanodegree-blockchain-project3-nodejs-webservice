@@ -26,14 +26,6 @@ class BlockController {
         this.app.get("/block/:index", (req, res) => {
             let index = req.params.index
             console.log("Getting block for index: " + index)
-            /* if(index < 0 || index >= this.blocks.length) {
-                res.send("Invalid block height")
-            } else {
-                // let block = JSON.stringify(this.blocks[index])
-                let block = this.blocks[index]
-                console.log("Block block: " + block)
-                res.send(block)
-            } */
 
             // this serves as an optimization as we dont even
             // query the DB if index of the block to GET is -ve.
