@@ -41,7 +41,7 @@ class BlockController {
      */
     postNewBlock() {
         let self = this
-        self.app.post("/api/block", (req, res) => {
+        self.app.post("/block", (req, res) => {
             let block = req.body
             console.log("req.body: " + JSON.stringify(block))
 
@@ -50,12 +50,19 @@ class BlockController {
                 || !block.body) {
                 res.send("No data for block. block.body: " + block.body)
             } else {
-                block.height = self.blocks.length
+                let newHeight = self.blocks.length
+                block.height = newHeight
                 block.time = new Date().getTime()
                 block.hash = SHA256(JSON.stringify(block)).toString()
+                if(newHeight != 0) {
+                    block.previousBlockHash = self.blocks[newHeight-1].hash
+                } else {
+                    block.previousBlockHash = ""
+                }
+                
                 console.log("Block before adding to chain: block " + JSON.stringify(block))
                 self.blocks.push(block)
-                res.sendStatus(201)
+                res.send(201, block)
             }
         });
     }
