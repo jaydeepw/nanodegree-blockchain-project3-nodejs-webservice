@@ -1,6 +1,7 @@
 My 3rd project when pursuing [Blockchain Developer Nanodegree](https://in.udacity.com/course/blockchain-developer-nanodegree--nd1309) from Udacity.
-This project is a webservice that creates an in-memory blockchain. It lets
-you interact with the blockchain using a REST API.
+This project is a webservice that creates a REAL blockchain. The block are stored
+on the chain using [LevelDB](https://github.com/google/leveldb). It lets
+you interact with the blockchain using a RESTful API.
 The API has been written using [ExpressJS](https://expressjs.com/) Node framework.
 
 Project Rubric: https://review.udacity.com/#!/rubrics/1707/view
