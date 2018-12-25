@@ -77,22 +77,12 @@ class BlockController {
 
             // if(block.body == "") {
             if (typeof block.body === 'undefined'
-                || !block.body) {
+                || !block.body || block.body === "") {
                 res.send("No data for block. block.body: " + block.body)
             } else {
-                let newHeight = self.blocks.length
-                block.height = newHeight
-                block.time = new Date().getTime()
-                block.hash = SHA256(JSON.stringify(block)).toString()
-                if(newHeight != 0) {
-                    block.previousBlockHash = self.blocks[newHeight-1].hash
-                } else {
-                    block.previousBlockHash = ""
-                }
-                
-                console.log("Block before adding to chain: block " + JSON.stringify(block))
-                self.blocks.push(block)
-                res.send(201, block)
+                self.myBlockChain.addBlock(block).then((result) => {
+                    res.status(201).send(block);
+                });
             }
         });
     }
