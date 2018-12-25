@@ -1,5 +1,8 @@
 const SHA256 = require('crypto-js/sha256');
-const BlockClass = require('./Block.js');
+const BlockChain = require('./BlockChain.js');
+const Block = require('./Block.js');
+
+
 
 /**
  * Controller Definition to encapsulate routes to work with blocks
@@ -12,8 +15,9 @@ class BlockController {
      */
     constructor(app) {
         this.app = app;
-        this.blocks = [];
-        this.initializeMockData();
+        // this.blocks = [];
+        // this.initializeMockData();
+        this.myBlockChain = new BlockChain.Blockchain();
         this.getBlockByIndex();
         this.postNewBlock();
     }
@@ -22,16 +26,39 @@ class BlockController {
      * Implement a GET Endpoint to retrieve a block by index, url: "/api/block/:index"
      */
     getBlockByIndex() {
+        let self = this;
         this.app.get("/block/:index", (req, res) => {
             let index = req.params.index
             console.log("Getting block for index: " + index)
-            if(index < 0 || index >= this.blocks.length) {
+            /* if(index < 0 || index >= this.blocks.length) {
                 res.send("Invalid block height")
             } else {
                 // let block = JSON.stringify(this.blocks[index])
                 let block = this.blocks[index]
                 console.log("Block block: " + block)
                 res.send(block)
+            } */
+
+            // this serves as an optimization as we dont even
+            // query the DB if index of the block to GET is -ve.
+            if(index < 0) {
+                res.send("Invalid block height. Cannot be negative")
+            } else {
+                self.myBlockChain.getBlockHeight().then((height) => {
+                    console.log("height of the chain: " + height);
+                    if(index > height) {
+                        res.send("Invalid block height")
+                    } else {
+                        self.myBlockChain.getBlock(index).then((block) => {
+                            let blockJson = JSON.parse(block);
+                            res.send(200, blockJson)
+                        }).catch((err) => {
+                            console.log(err);
+                        });
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                });
             }
         });
     }
